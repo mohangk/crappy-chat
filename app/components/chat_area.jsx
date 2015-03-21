@@ -34,7 +34,7 @@ var ChatArea = React.createClass({
   },
 
   chatBoxClass: function() {
-    if(this.props.config.display_mode == 'inpage') {
+    if(this.props.config.display_mode == 'inpage' || this.props.mobile == true) {
       return InPageChatBox;
     } else {
       return OnPageChatBox;
@@ -47,7 +47,7 @@ var ChatArea = React.createClass({
 
     if(this.props. comms.isConnected()) { 
       return (
-      <ChatBox>
+      <ChatBox mobile={this.props.mobile}>
         <MessagePane comms={this.props.comms} />
         <LoggedInBox logout={this.logout} username={this.state.username} room={this.state.room} />
         <MessageBox comms={this.props.comms} />
@@ -55,7 +55,7 @@ var ChatArea = React.createClass({
       );
     } else {
       return (
-        <ChatBox>
+        <ChatBox mobile={this.props.mobile}>
           <LoginForm loggedInAs={this.loggedInAs} username="test" room="testroom" />
         </ChatBox>
       );

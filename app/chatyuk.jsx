@@ -4,7 +4,11 @@ var ChatArea = require('./components/chat_area.jsx');
 
 var comms = Object.create(XmppComms);
 
+var MobileDetect = require('mobile-detect');
 var Chatyuk = {
+  isMobile: function() {
+    return new MobileDetect(window.navigator.userAgent).mobile() !== null;
+  },
 
   defaultConfig: {
     display_mode: 'inpage'
@@ -24,7 +28,7 @@ var Chatyuk = {
 
   renderComponent: function(parentEl) {
     React.render(
-      <ChatArea comms={comms} config={this.config} />,
+      <ChatArea comms={comms} config={this.config} mobile={this.isMobile()} />,
       parentEl
     );
   }
